@@ -1,4 +1,4 @@
-# Call To Actio
+# Call To Action
 
 A web app to help shleters keep track of their inventory. It also posts social meida posts once they are running low on an item or supply.
 
