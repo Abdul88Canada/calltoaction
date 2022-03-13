@@ -6,7 +6,20 @@ const itemSchema = mongoose.Schema({
     count: {
         type: Number,
         default: 0
-    }
+    },
+    lowSupplyLimit: {
+        type: Number,
+        default: 0
+    },
+    tracked: {
+        type: Boolean,
+        default: false
+    },
+    history: [{
+        operation: String,
+        amout: Number,
+        date: Date
+    }]
 });
 
 const donationItem = mongoose.model('donationItem', itemSchema);

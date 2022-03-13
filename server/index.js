@@ -5,6 +5,7 @@ import cors from 'cors';
 
 import itemRoutes from './routes/items.js';
 import typeRoutes from './routes/types.js';
+import userRoutes from './routes/users.js';
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(cors());
 
 app.use('/items', itemRoutes);
 app.use('/types', typeRoutes);
+app.use('/user', userRoutes);
 
 const DB_CONNECTION_URL = 'mongodb+srv://3li:Tumbis@cluster0.gcjwf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
 const PORT = process.env.PORT || 5000;
