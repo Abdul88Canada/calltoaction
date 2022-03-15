@@ -8,7 +8,7 @@ const userSchema = mongoose.Schema({
     FacebookAccount: String,
     InstagramAccoutn: String,
     tags: [],
-    postContent: String;
+    postContent: String
 });
 
 const user = mongoose.model('user', userSchema);

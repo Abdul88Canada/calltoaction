@@ -1,21 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import {Provider} from 'react-redux';
+import {createStore, applyMiddleware, compose} from 'redux';
+import thunk from 'redux-thunk';
+
 
 import App from './components/App';
-import Form from './components/Form/Form';
+import reducers from './reducers'; 
+
+
+const store = createStore(reducers, compose(applyMiddleware(thunk)));
+
 
 ReactDOM.render(
-    <div>
-        <BrowserRouter>
-            <div>
-                <Routes>
-                    <Route path='/' exact element={<App/>} />
-                    <Route path='/additem' exact element={<Form/>} />
-                </Routes>
-            </div>
-        </BrowserRouter>
-    </div>
+    <Provider store={store}>
+        <App />
+    </Provider>
     ,
     document.querySelector('#root')
 );

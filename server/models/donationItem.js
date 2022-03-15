@@ -13,7 +13,7 @@ const itemSchema = mongoose.Schema({
     },
     tracked: {
         type: Boolean,
-        default: false
+        default: true
     },
     history: [{
         operation: String,
