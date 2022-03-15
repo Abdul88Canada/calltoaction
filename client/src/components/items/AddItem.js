@@ -1,29 +1,67 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+
+import { getTypes } from '../../actions/types';
+import {createItem} from '../../actions/items';
 
 const AddItem = () => {
 
-    const handleSubmit = (e) => {
+    const [newItem, setItem] = useState({
+        name: '',
+        type: '',
+        count: 0,
+        lowSupplyLimit: 0,
+        tracked: true,
+        history: []
+    });
 
+    const clear = () => {
+        setItem({
+            name: '',
+            type: '',
+            count: 0,
+            lowSupplyLimit: 0,
+            tracked: true,
+            history: []
+        });
+    }
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getTypes());
+    }, [dispatch]);
+
+    const types = useSelector((state) => state.types);
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        dispatch(createItem(newItem));
+        clear();
     }
     return (
         <div>
             <form className="ui form" onSubmit={handleSubmit}>
                 <div className="field">
                     <label>Item Name</label>
-                    <input type="text" name="type" placeholder="Item Name" onChange={(e) => {}}/>
+                    <input type="text" name="name" placeholder="Item Name" onChange={(e) => {}}/>
                 </div>
                 <div className="field">
                     <select className="ui dropdown">
-                        <option value="">Gender</option>
-                        <option value="1">Male</option>
-                        <option value="0">Female</option>
+                        {types.map((type) => {
+                            return <option value="" name="type" key={type._id}>{type.type}</option>
+                        })}
                     </select>
                 </div>
                 <div className="field">
                     <div className="ui checkbox">
-                        <input type="checkbox" name="tracked" tabIndex="0" onChange={e => {}} />
+                        <input type="checkbox" name="tracked" tabIndex="0" onChange={e => {} } checked/>
                         <label>Track this item</label>
                     </div>
+                </div>
+                <div className="field">
+                    <label>Quantity</label>
+                    <input type="text" name="count" placeholder="Quantity" onChange={(e) => {}}/>
                 </div>
                 <div className="field">
                     <label>Low Supply Limit</label>
