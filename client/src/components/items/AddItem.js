@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
-import { getTypes } from '../../actions/types';
+import { getTypes, updateType } from '../../actions/types';
 import {createItem} from '../../actions/items';
 
 const AddItem = () => {
+    // State to create new item
     const [newItem, setItem] = useState({
         name: '',
         type: '',
@@ -14,6 +15,9 @@ const AddItem = () => {
         tracked: true,
         history: []
     });
+
+    // State to track the id of type chosen
+    const [i, setI] = useState(0);
 
     const types = useSelector((state) => state.types);
 
@@ -34,6 +38,7 @@ const AddItem = () => {
             tracked: true,
             history: []
         });
+        setI(0);
     }
 
     
@@ -43,10 +48,11 @@ const AddItem = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         newItem.history.push({operation: 'Created', amount: newItem.count, date: new Date()});
-
+        console.log(i);
         if(newItem.type ==='') newItem.type = types[0].type;
-        console.log(newItem);
+        const updatedType = {... types[i], count: (types[i].count + newItem.count)}
         dispatch(createItem(newItem));
+        dispatch(updateType(updatedType, types[i]._id));
         clear();
     }
     return (
@@ -57,7 +63,9 @@ const AddItem = () => {
                     <input type="text" name="name" placeholder="Item Name" value={newItem.name} onChange={e => setItem({... newItem, name: e.target.value})}/>
                 </div>
                 <div className="field">
-                    <select className="ui dropdown" onChange={e => setItem({... newItem, type: e.target.value})}>
+                    <select className="ui dropdown" onChange={e => {
+                        setI(e.target.options.selectedIndex);
+                        setItem({... newItem, type: e.target.value})}}>
                         {types.map((type) => {
                             return <option name="type" value={type.type} key={type._id}>{type.type}</option>
                         })}

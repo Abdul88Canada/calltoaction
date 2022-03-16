@@ -20,3 +20,13 @@ export const createType = (type) => async (dispatch) => {
         console.log(error);
     }
 }
+
+//action creator for updating a type
+export const updateType = (id, type) => async (dispatch) => {
+    try {
+        const {data} = await api.updateType(id, type);
+        dispatch({type: 'UPDATE', payload: data});
+    } catch (error) {
+        console.log(error);
+    }
+}

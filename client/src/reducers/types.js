@@ -4,7 +4,9 @@ export default (types = [], action) => {
             return action.payload;
         case 'CREATE': 
             return [... types, action.payload];
-            default:
+        case 'UPDATE':
+            return types.map((type) => type._id == action.payload._id ? action.payload : type);
+        default:
                 return types;
     }
 };
