@@ -38,14 +38,17 @@ const AddType = () => {
                 </div>
                 <div className="field">
                     <div className="ui checkbox">
-                        <input type="checkbox" name="tracked" tabIndex="0" value={newType.tracked} onChange={e => setType({... newType, tracked: (!newType.tracked)})} />
+                        <input type="checkbox" name="tracked" tabIndex="0" checked={newType.tracked} onChange={e => setType({... newType, tracked: (!newType.tracked)})} />
                         <label>Track this type</label>
                     </div>
                 </div>
-                <div className="field">
-                    <label>Low Supply Limit</label>
-                    <input type="number" name="lowSupplyLimit" placeholder="low Supply Limit" value={newType.lowSupplyLimit} onChange={(e) => setType({... newType, lowSupplyLimit: e.target.value})}/>
-                </div>
+                {!newType.tracked ? <div></div>: 
+                    <div className="field">
+                        <label>Low Supply Limit</label>
+                        <input type="number" name="lowSupplyLimit" placeholder="low Supply Limit" value={newType.lowSupplyLimit} onChange={(e) => setType({... newType, lowSupplyLimit: e.target.value})}/>
+                    </div>
+                }
+                
                 <button className="ui button" type="submit">Submit</button>
             </form>
         </div>

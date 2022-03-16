@@ -28,7 +28,8 @@ const Types = () => {
                         Tracked: {type.tracked ? 'Ture' : 'False'}<br/>
                         Low Supply Limit: {type.lowSupplyLimit}
                         <div className="ui two buttons">
-                            <div className="negative ui button">Edit</div>
+                            <div className="positive ui button">Edit</div>
+                            <div className="negative ui button">Delete</div>
                         </div>
                     </div>
                 </div>

@@ -17,7 +17,7 @@ const itemSchema = mongoose.Schema({
     },
     history: [{
         operation: String,
-        amout: Number,
+        amount: Number,
         date: Date
     }]
 });
