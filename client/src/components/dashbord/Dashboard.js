@@ -1,8 +1,10 @@
 import React from "react";
 
+import Items from "../items/Items";
+
 const Dashboard = () => {
     return (
-        <div>Dashboard</div>
+        <div><Items /></div>
     );
 }
 
