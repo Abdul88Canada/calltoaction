@@ -47,10 +47,11 @@ const AddItem = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
+
         newItem.history.push({operation: 'Created', amount: newItem.count, date: new Date()});
-        console.log(i);
-        if(newItem.type ==='') newItem.type = types[0].type;
-        const updatedType = {... types[i], count: (types[i].count + newItem.count)}
+        newItem.type = types[i].type;
+  
+        const updatedType = {... types[i], count: (parseInt(types[i].count) + parseInt(newItem.count))}
         dispatch(createItem(newItem));
         dispatch(updateType(updatedType, types[i]._id));
         clear();
@@ -63,9 +64,7 @@ const AddItem = () => {
                     <input type="text" name="name" placeholder="Item Name" value={newItem.name} onChange={e => setItem({... newItem, name: e.target.value})}/>
                 </div>
                 <div className="field">
-                    <select className="ui dropdown" onChange={e => {
-                        setI(e.target.options.selectedIndex);
-                        setItem({... newItem, type: e.target.value})}}>
+                    <select className="ui dropdown" onChange={e => setI(e.target.options.selectedIndex)}>
                         {types.map((type) => {
                             return <option name="type" value={type.type} key={type._id}>{type.type}</option>
                         })}
