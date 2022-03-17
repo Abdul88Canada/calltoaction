@@ -1,18 +1,19 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+
 
 import { getTypes } from '../../actions/types';
 
 const Types = () => {
 
     const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(getTypes());
-    }, [dispatch]);
+        useEffect(() => {
+            dispatch(getTypes());
+        }, [dispatch]);
 
     const types = useSelector((state) => state.types);
-        return ( !types.length ? <div>Loading</div> :
+    
+    return ( !types.length ? <div>Loading</div> :
         (
         <div className="ui cards">
             {types.map((type) => {

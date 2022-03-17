@@ -1,6 +1,5 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-
 
 import AddItem from './items/AddItem';
 import AddType from './types/AddType';
@@ -8,11 +7,7 @@ import Types from './types/Types';
 import Header from './Header';
 import Dashboard from './dashbord/Dashboard';
 
-
-
-
 const App = () => {
-
     return (
         <BrowserRouter>
             <Header />

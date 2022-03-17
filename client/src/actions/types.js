@@ -5,7 +5,7 @@ export const getTypes = () => async (dispatch) => {
     try {
         const {data} = await api.fetchTypes();
         
-        dispatch({type: 'FETCH_ALL', payload: data});
+        dispatch({type: 'FETCH_ALL_TYPES', payload: data});
         
     } catch (error) {
         console.log('ERROR!'+error);
@@ -15,7 +15,7 @@ export const getTypes = () => async (dispatch) => {
 export const createType = (type) => async (dispatch) => {
     try {
         const {data} = await api.createType(type);
-        dispatch({type: 'CREATE', payload: data});
+        dispatch({type: 'CREATE_TYPE', payload: data});
     } catch (error) {
         console.log(error);
     }
