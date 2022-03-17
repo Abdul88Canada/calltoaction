@@ -33,10 +33,12 @@ const Items = () => {
                   <td data-label="count">{item.count}</td>
                   <td data-label="tracked">{item.tracked ? 'True' : 'False'}</td>
                   <td data-label="lowsupplycount">{item.lowSupplyLimit}</td>
-                  <td data-label="lowsupplycount"><div className="ui two buttons">
+                  <td data-label="lowsupplycount">
+                        <div className="ui two buttons">
                             <div className="positive ui button">Edit</div>
                             <div className="negative ui button">Delete</div>
-                        </div></td>
+                        </div>
+                  </td>
                 </tr>
               )
             })}
