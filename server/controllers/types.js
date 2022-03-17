@@ -27,7 +27,7 @@ export const updateType = async (req, res) => {
     const type = req.body;
     // this is to check that the id is a mogoose object
     if(!mongoose.Types.ObjectId.isValid(_id)) {
-        return res.status(404).send('No post with that id: ' + _id);
+        return res.status(404).send('No type with that id: ' + _id);
     }
 
     const updatedType = await donationType.findByIdAndUpdate(_id, {... type, _id}, {new: true});

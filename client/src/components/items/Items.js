@@ -11,6 +11,10 @@ const Items = () => {
         dispatch(getItems());
     }, [dispatch]);
 
+    const handleOnChange = (e) => {
+      console.log(e.target.value)
+    }
+
     const items = useSelector((state) => state.items);
     
     return (
@@ -28,14 +32,13 @@ const Items = () => {
             {items.map((item) => {
               return (
                 <tr key={item._id}>
-                  <td data-label="name">{item.name}</td>
+                  <td data-label="name"><div className="ui form field"><input type="text" name="name" value={item.name} placeholder="Item Name" onChange={e => handleOnChange(e)}/></div></td>
                   <td data-label="type">{item.type}</td>
                   <td data-label="count">{item.count}</td>
                   <td data-label="tracked">{item.tracked ? 'True' : 'False'}</td>
                   <td data-label="lowsupplycount">{item.lowSupplyLimit}</td>
                   <td data-label="lowsupplycount">
                         <div className="ui two buttons">
-                            <div className="positive ui button">Edit</div>
                             <div className="negative ui button">Delete</div>
                         </div>
                   </td>
