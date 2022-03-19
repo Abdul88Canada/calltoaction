@@ -20,7 +20,7 @@ const Items = () => {
 
     const handleDelete = (item) => {
       dispatch(updateTypeCount(item.type.id, item.count, 'SUB'));
-      //dispatch(deleteItem(item._id))
+      dispatch(deleteItem(item._id))
     }
 
     const items = useSelector((state) => state.items);

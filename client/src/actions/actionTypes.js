@@ -8,3 +8,4 @@ export const FETCH_ONE_TYPE = 'FETCH_ONE_TYPE';
 export const CREATE_TYPE = 'CREATE_TYPE';
 export const UPDATE_TYPE = 'UPDATE_TYPE';
 export const UPDATE_TYPE_COUNT = 'UPDATE_TYPE_COUNT';
+export const DELETE_TYPE = 'DELETE_TYPE';

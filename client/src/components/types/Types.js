@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 
-import { getTypes } from '../../actions/types';
+import { getTypes, deleteType } from '../../actions/types';
 
 const Types = () => {
 
@@ -12,6 +12,10 @@ const Types = () => {
         }, [dispatch]);
 
     const types = useSelector((state) => state.types);
+
+    const handleDelete = (id) => {
+        dispatch(deleteType(id));
+    }
     
     return ( !types.length ? <div>Loading</div> :
         (
@@ -30,7 +34,7 @@ const Types = () => {
                         Low Supply Limit: {type.lowSupplyLimit}
                         <div className="ui two buttons">
                             <div className="positive ui button">Edit</div>
-                            <div className="negative ui button">Delete</div>
+                            <div className="negative ui button" onClick={() => handleDelete(type._id)}>Delete</div>
                         </div>
                     </div>
                 </div>

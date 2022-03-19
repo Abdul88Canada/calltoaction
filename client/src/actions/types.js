@@ -1,6 +1,6 @@
 import * as api from '../api/types';
 
-import { FETCH_ALL_TYPES, CREATE_TYPE, UPDATE_TYPE, FETCH_ONE_TYPE, UPDATE_TYPE_COUNT } from './actionTypes';
+import { FETCH_ALL_TYPES, CREATE_TYPE, UPDATE_TYPE, FETCH_ONE_TYPE, UPDATE_TYPE_COUNT, DELETE_TYPE } from './actionTypes';
 //Action creator for getting all the types
 export const getTypes = () => async (dispatch) => {
     try {
@@ -45,6 +45,15 @@ export const updateTypeCount = (id, amount, operation) => async (dispatch) => {
     try {
         const {data} = await api.updateTypeCount(id, {amount, operation});
         dispatch({type: UPDATE_TYPE_COUNT, payload: data});
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const deleteType = (id) => async (dispatch) => {
+    try {
+        await api.deleteType(id);
+        dispatch({type: DELETE_TYPE, payload: id})
     } catch (error) {
         console.log(error);
     }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
-import { getTypes, updateType } from '../../actions/types';
+import { getTypes, updateTypeCount } from '../../actions/types';
 import {createItem} from '../../actions/items';
 
 const ItemForm = () => {
@@ -57,10 +57,9 @@ const ItemForm = () => {
         newItem.history.push({operation: 'Created', amount: newItem.count, date: new Date()});
         newItem.type.name = types[i].type;
         newItem.type.id = types[i]._id;
-  
-        const updatedType = {... types[i], count: (parseInt(types[i].count) + parseInt(newItem.count))}
+        
+        dispatch(updateTypeCount(newItem.type.id, newItem.count, 'ADD'));
         dispatch(createItem(newItem));
-        dispatch(updateType(updatedType, types[i]._id));
         clear();
     }
     return (

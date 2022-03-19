@@ -1,4 +1,4 @@
-import { FETCH_ALL_TYPES, CREATE_TYPE, UPDATE_TYPE, FETCH_ONE_TYPE, UPDATE_TYPE_COUNT } from '../actions/actionTypes';
+import { FETCH_ALL_TYPES, CREATE_TYPE, UPDATE_TYPE, FETCH_ONE_TYPE, UPDATE_TYPE_COUNT,  DELETE_TYPE } from '../actions/actionTypes';
 
 
 export default (types = [], action) => {
@@ -12,7 +12,9 @@ export default (types = [], action) => {
         case FETCH_ONE_TYPE:
             return types.filter((type) => type._id === action.payload._id);
         case UPDATE_TYPE_COUNT:
-            return [];
+            return types.filter((type) => type._id === action.payload);
+            case DELETE_TYPE:
+                return types.filter((type) => type._id !== action.payload);
         default:
                 return types;
     }
