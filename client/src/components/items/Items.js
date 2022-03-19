@@ -1,7 +1,9 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-import {getItems} from '../../actions/items';
+
+import {getItems, deleteItem} from '../../actions/items';
 
 
 const Items = () => {
@@ -16,7 +18,7 @@ const Items = () => {
     }
 
     const items = useSelector((state) => state.items);
-    
+
     return (
         <table className="ui celled table">
           <thead>
@@ -32,14 +34,15 @@ const Items = () => {
             {items.map((item) => {
               return (
                 <tr key={item._id}>
-                  <td data-label="name"><div className="ui form field"><input type="text" name="name" value={item.name} placeholder="Item Name" onChange={e => handleOnChange(e)}/></div></td>
+                  <td data-label="name">{item.name}</td>
                   <td data-label="type">{item.type}</td>
                   <td data-label="count">{item.count}</td>
-                  <td data-label="tracked">{item.tracked ? 'True' : 'False'}</td>
+                  <td data-label="tracked"><input type="checkbox" name="tracked" tabIndex="0" value={item.tracked} checked={item.tracked}/></td>
                   <td data-label="lowsupplycount">{item.lowSupplyLimit}</td>
                   <td data-label="lowsupplycount">
                         <div className="ui two buttons">
-                            <div className="negative ui button">Delete</div>
+                            <div className="positive ui button" component={Link} to='/additem'>Edit</div>
+                            <div className="negative ui button" onClick={() => dispatch(deleteItem(item._id))}>Delete</div>
                         </div>
                   </td>
                 </tr>

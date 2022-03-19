@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { getTypes, updateType } from '../../actions/types';
 import {createItem} from '../../actions/items';
 
-const AddItem = () => {
+const ItemForm = () => {
     // State to create new item
     const [newItem, setItem] = useState({
         name: '',
@@ -92,4 +92,4 @@ const AddItem = () => {
     )
 }
 
-export default AddItem;
+export default ItemForm;
