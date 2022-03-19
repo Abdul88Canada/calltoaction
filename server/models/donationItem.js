@@ -2,7 +2,10 @@ import mongoose from 'mongoose';
 
 const itemSchema = mongoose.Schema({
     name: String,
-    type: String,
+    type: {
+        name: String,
+        id: String
+    },
     count: {
         type: Number,
         default: 0

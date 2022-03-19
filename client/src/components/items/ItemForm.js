@@ -9,7 +9,10 @@ const ItemForm = () => {
     // State to create new item
     const [newItem, setItem] = useState({
         name: '',
-        type: '',
+        type: {
+            name: '',
+            id: ''
+        },
         count: 0,
         lowSupplyLimit: 0,
         tracked: true,
@@ -32,7 +35,10 @@ const ItemForm = () => {
     const clear = () => {
         setItem({
             name: '',
-            type: '',
+            type: {
+                name: '',
+                id: ''
+            },
             count: 0,
             lowSupplyLimit: 0,
             tracked: true,
@@ -47,9 +53,10 @@ const ItemForm = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        console.log(newItem);
         newItem.history.push({operation: 'Created', amount: newItem.count, date: new Date()});
-        newItem.type = types[i].type;
+        newItem.type.name = types[i].type;
+        newItem.type.id = types[i]._id;
   
         const updatedType = {... types[i], count: (parseInt(types[i].count) + parseInt(newItem.count))}
         dispatch(createItem(newItem));

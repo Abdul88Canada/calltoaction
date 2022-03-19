@@ -1,11 +1,12 @@
 import * as api from '../api/types';
-//Action creator for getting all the types
 
+import { FETCH_ALL_TYPES, CREATE_TYPE, UPDATE_TYPE, FETCH_ONE_TYPE, UPDATE_TYPE_COUNT } from './actionTypes';
+//Action creator for getting all the types
 export const getTypes = () => async (dispatch) => {
     try {
         const {data} = await api.fetchTypes();
         
-        dispatch({type: 'FETCH_ALL_TYPES', payload: data});
+        dispatch({type: FETCH_ALL_TYPES, payload: data});
         
     } catch (error) {
         console.log('ERROR!'+error);
@@ -15,7 +16,7 @@ export const getTypes = () => async (dispatch) => {
 export const createType = (type) => async (dispatch) => {
     try {
         const {data} = await api.createType(type);
-        dispatch({type: 'CREATE_TYPE', payload: data});
+        dispatch({type: CREATE_TYPE, payload: data});
     } catch (error) {
         console.log(error);
     }
@@ -25,7 +26,25 @@ export const createType = (type) => async (dispatch) => {
 export const updateType = (id, type) => async (dispatch) => {
     try {
         const {data} = await api.updateType(id, type);
-        dispatch({type: 'UPDATE_TYPE', payload: data});
+        dispatch({type: UPDATE_TYPE, payload: data});
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const getOneType = (id) => async (dispatch) => {
+    try {
+        const {data} = await api.getOneType(id);
+        dispatch({type: FETCH_ONE_TYPE, payload: data});
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const updateTypeCount = (id, amount, operation) => async (dispatch) => {
+    try {
+        const {data} = await api.updateTypeCount(id, {amount, operation});
+        dispatch({type: UPDATE_TYPE_COUNT, payload: data});
     } catch (error) {
         console.log(error);
     }

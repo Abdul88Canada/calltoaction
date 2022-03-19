@@ -4,8 +4,6 @@ import donationItem from "../models/donationItem.js";
 export const getItems = async (req, res) => {
     try {
         const items = await donationItem.find();
-        console.log('I am in the server for fetching all the items');
-        console.log(items);
         res.status(200).json(items);
     } catch (error) {
         res.status(404).json({message: error.message});
