@@ -1,13 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 import {getItems, deleteItem} from '../../actions/items';
-import { getOneType, updateTypeCount } from '../../actions/types';
+import { updateTypeCount } from '../../actions/types';
 
 
 const Items = () => {
+
+  const navigate = useNavigate();
+
+  const onEditClick = (item) => {
+    navigate('/additem', {state:{item: item}});
+  }
 
   const dispatch = useDispatch();
     useEffect(() => {
@@ -47,7 +53,7 @@ const Items = () => {
                   <td data-label="lowsupplycount">{item.lowSupplyLimit}</td>
                   <td data-label="lowsupplycount">
                         <div className="ui two buttons">
-                            <div className="positive ui button" component={Link} to='/additem'>Edit</div>
+                            <div className="positive ui button" onClick={() => onEditClick(item)} >Edit</div>
                             <div className="negative ui button" onClick={() => handleDelete(item)}>Delete</div>
                         </div>
                   </td>

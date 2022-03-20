@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+import {useLocation} from "react-router-dom";
 
 import { getTypes, updateTypeCount } from '../../actions/types';
-import {createItem} from '../../actions/items';
+import {createItem, updateItem} from '../../actions/items';
 
 const ItemForm = () => {
+
+    const {state} = useLocation();
     // State to create new item
-    const [newItem, setItem] = useState({
+    const [newItem, setItem] = useState(state ? state.item : {
         name: '',
         type: {
             name: '',
@@ -53,13 +56,17 @@ const ItemForm = () => {
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(newItem);
-        newItem.history.push({operation: 'Created', amount: newItem.count, date: new Date()});
+        newItem.history.push(state ? {operation: 'Updated', amount: newItem.count, date: new Date()}:{operation: 'Created', amount: newItem.count, date: new Date()});
         newItem.type.name = types[i].type;
         newItem.type.id = types[i]._id;
         
-        dispatch(updateTypeCount(newItem.type.id, newItem.count, 'ADD'));
-        dispatch(createItem(newItem));
+        
+        if (state)
+            dispatch(updateItem(newItem, newItem._id));
+        else {
+            dispatch(createItem(newItem));
+            dispatch(updateTypeCount(newItem.type.id, newItem.count, 'ADD'));
+        }
         clear();
     }
     return (
