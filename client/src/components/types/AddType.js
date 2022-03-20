@@ -34,7 +34,7 @@ const AddType = () => {
             <form className="ui form" onSubmit={handleSubmit}>
                 <div className="field">
                     <label>Type Name</label>
-                    <input type="text" name="type" placeholder="Type Name" value={newType.type} onChange={(e) => setType({... newType, type: e.target.value})}/>
+                    <input type="text" name="type" placeholder="Type Name" value={newType.type} onChange={(e) => setType({... newType, type: e.target.value})} required/>
                 </div>
                 <div className="field">
                     <div className="ui checkbox">

@@ -1,7 +1,10 @@
 import mongoose from 'mongoose';
 
 const typeSchema = mongoose.Schema({
-    type: String,
+    type: {
+        type: String,
+        unique: true
+    },
     count: {
         type: Number,
         default: 0

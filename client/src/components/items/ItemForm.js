@@ -67,10 +67,10 @@ const ItemForm = () => {
             <form className="ui form" onSubmit={handleSubmit}>
                 <div className="field">
                     <label>Item Name</label>
-                    <input type="text" name="name" placeholder="Item Name" value={newItem.name} onChange={e => setItem({... newItem, name: e.target.value})}/>
+                    <input type="text" name="name" placeholder="Item Name" value={newItem.name} onChange={e => setItem({... newItem, name: e.target.value})} required/>
                 </div>
                 <div className="field">
-                    <select className="ui dropdown" onChange={e => setI(e.target.options.selectedIndex)}>
+                    <select className="ui dropdown" onChange={e => setI(e.target.options.selectedIndex)} required>
                         {types.map((type) => {
                             return <option name="type" value={type.type} key={type._id}>{type.type}</option>
                         })}

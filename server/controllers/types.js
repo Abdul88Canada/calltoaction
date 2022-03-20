@@ -52,7 +52,7 @@ export const updateTypeCount = async (req, res) => {
     }
     if (operation === 'ADD') await donationType.findByIdAndUpdate(_id, { $inc: { count: amount} });
     if (operation === 'SUB') await donationType.findByIdAndUpdate(_id, { $inc: { count: -amount} });
-    res.json(updatedType);
+    res.json({message: 'Type updated successfully'});
 }
 
 export const deleteType = async (req, res) => {
