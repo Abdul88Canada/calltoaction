@@ -1,10 +1,18 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 
 
 import { getTypes, deleteType } from '../../actions/types';
 
 const Types = () => {
+
+    const navigate = useNavigate();
+
+    const onEditClick = (type) => {
+        navigate('/addtype', {state:{type: type}});
+      }
 
     const dispatch = useDispatch();
         useEffect(() => {
@@ -33,7 +41,7 @@ const Types = () => {
                         Tracked: {type.tracked ? 'Ture' : 'False'}<br/>
                         Low Supply Limit: {type.lowSupplyLimit}
                         <div className="ui two buttons">
-                            <div className="positive ui button">Edit</div>
+                            <div className="positive ui button" onClick={() => onEditClick(type)}>Edit</div>
                             <div className="negative ui button" onClick={() => handleDelete(type._id)}>Delete</div>
                         </div>
                     </div>

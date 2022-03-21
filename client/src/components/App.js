@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import ItemForm from './items/ItemForm';
-import AddType from './types/AddType';
+import TypeForm from './types/TypeForm';
 import Types from './types/Types';
 import Header from './Header';
 import Dashboard from './dashbord/Dashboard';
@@ -15,7 +15,7 @@ const App = () => {
                 <Routes>
                     <Route path='/' exact element={<Dashboard/>} />
                     <Route path='/additem' exact element={<ItemForm/>} />
-                    <Route path='/addtype' exact element={<AddType/>} />
+                    <Route path='/addtype' exact element={<TypeForm/>} />
                     <Route path='/typesList' exact element={<Types/>} />
                 </Routes>
             </div>
