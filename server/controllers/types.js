@@ -52,7 +52,7 @@ export const getOneType = async (req, res) => {
 export const updateTypeCount = async (req, res) => {
     const {id: _id} = req.params;
     const {amount, operation} = req.body;
-    console.log('NO SUPOSED TO BE HERE');
+    
     if(!mongoose.Types.ObjectId.isValid(_id)) {
         return res.status(404).send('No type with that id: ' + _id);
     }

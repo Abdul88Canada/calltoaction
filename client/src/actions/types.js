@@ -18,7 +18,7 @@ export const createType = (type) => async (dispatch) => {
         const {data} = await api.createType(type);
         dispatch({type: CREATE_TYPE, payload: data});
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
     }
 }
 

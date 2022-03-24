@@ -22,11 +22,7 @@ const ItemForm = () => {
         history: []
     });
 
-    // State to track the id of type chosen
-    const [i, setI] = useState(0);
-
     const types = useSelector((state) => state.types);
-
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -47,20 +43,12 @@ const ItemForm = () => {
             tracked: true,
             history: []
         });
-        setI(0);
     }
-
-    
-
-    
     
     const handleSubmit = (e) => {
         e.preventDefault();
         newItem.history.push(state ? {operation: 'Updated', amount: newItem.count, date: new Date()}:{operation: 'Created', amount: newItem.count, date: new Date()});
-        newItem.type.name = types[i].type;
-        newItem.type.id = types[i]._id;
-        
-        
+              
         if (state)
             dispatch(updateItem(newItem, newItem._id));
         else {
@@ -76,8 +64,11 @@ const ItemForm = () => {
                     <label>Item Name</label>
                     <input type="text" name="name" placeholder="Item Name" value={newItem.name} onChange={e => setItem({... newItem, name: e.target.value})} required/>
                 </div>
-                <div className="field">
-                    <select className="ui dropdown" onChange={e => setI(e.target.options.selectedIndex)} required>
+                <div className="field">  
+                    <select className="ui dropdown" onChange={e => {
+                        setItem({...newItem, type: {name: types[e.target.options.selectedIndex-1].type, id: types[e.target.options.selectedIndex-1]._id}})}
+                        } required>
+                            {newItem.type.name === '' ? <option name="type" value='' key=''>Select Type</option> : null}
                         {types.map((type) => {
                             return <option name="type" value={type.type} key={type._id}>{type.type}</option>
                         })}
