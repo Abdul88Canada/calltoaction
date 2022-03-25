@@ -19,7 +19,8 @@ const ItemForm = () => {
         count: 0,
         lowSupplyLimit: 0,
         tracked: true,
-        history: []
+        history: [],
+        email: user.result.email
     });
 
     const types = useSelector((state) => state.types);

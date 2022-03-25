@@ -3,12 +3,12 @@ import * as api from '../api/items';
 import { FETCH_ALL_ITEMS, CREATE_ITEM, UPDATE_ITEM, DELETE_ITEM } from './actionTypes';
 
 //Action creator for getting all the types
-export const getItems = () => async (dispatch) => {
+export const getItems = (email) => async (dispatch) => {
     try {
-        const {data} = await api.fetchItems();
+        const {data} = await api.fetchItems(email);
         dispatch({type: FETCH_ALL_ITEMS, payload: data});
     } catch (error) {
-        console.log('ERROR!'+error);
+        console.log('ERROR! '+ error);
     }
 }
 //action creator for creating a type

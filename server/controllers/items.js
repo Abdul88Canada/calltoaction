@@ -2,8 +2,9 @@ import mongoose from "mongoose";
 import donationItem from "../models/donationItem.js";
 
 export const getItems = async (req, res) => {
+    const {email} = req.query;
     try {
-        const items = await donationItem.find();
+        const items = await donationItem.find({email: email});
         res.status(200).json(items);
     } catch (error) {
         res.status(404).json({message: error.message});

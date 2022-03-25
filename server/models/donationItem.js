@@ -22,7 +22,8 @@ const itemSchema = mongoose.Schema({
         operation: String,
         amount: Number,
         date: Date
-    }]
+    }],
+    email: String
 });
 
 const donationItem = mongoose.model('donationItem', itemSchema);
