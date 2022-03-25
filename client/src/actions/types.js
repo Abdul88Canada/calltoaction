@@ -2,9 +2,9 @@ import * as api from '../api/types';
 
 import { FETCH_ALL_TYPES, CREATE_TYPE, UPDATE_TYPE, FETCH_ONE_TYPE, UPDATE_TYPE_COUNT, DELETE_TYPE } from './actionTypes';
 //Action creator for getting all the types
-export const getTypes = () => async (dispatch) => {
+export const getTypes = (email) => async (dispatch) => {
     try {
-        const {data} = await api.fetchTypes();
+        const {data} = await api.fetchTypes(email);
         
         dispatch({type: FETCH_ALL_TYPES, payload: data});
         

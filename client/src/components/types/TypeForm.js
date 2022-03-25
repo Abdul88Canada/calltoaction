@@ -8,12 +8,14 @@ import {createType, updateType} from '../../actions/types';
 const AddType = () => {
     
     const {state} = useLocation();
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
 
     const [type, setType] = useState(state ? state.type : {
         type: '',
         count: 0,
         lowSupplyLimit: 0,
-        tracked: false
+        tracked: false,
+        email: user.result.email
     });
 
     const dispatch = useDispatch();

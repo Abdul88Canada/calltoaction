@@ -16,7 +16,8 @@ const typeSchema = mongoose.Schema({
     tracked: {
         type: Boolean,
         default: false
-    }
+    },
+    email: String
 });
 
 const donationType = mongoose.model('donationType', typeSchema);

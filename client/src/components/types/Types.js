@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,6 +9,7 @@ import { getTypes, deleteType } from '../../actions/types';
 const Types = () => {
 
     const navigate = useNavigate();
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
 
     const onEditClick = (type) => {
         navigate('/addtype', {state:{type: type}});
@@ -16,7 +17,7 @@ const Types = () => {
 
     const dispatch = useDispatch();
         useEffect(() => {
-            dispatch(getTypes());
+            dispatch(getTypes(user.result.email));
         }, [dispatch]);
 
     const types = useSelector((state) => state.types);

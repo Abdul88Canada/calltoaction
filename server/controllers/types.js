@@ -2,8 +2,10 @@ import mongoose from "mongoose";
 import donationType from "../models/donationType.js";
 
 export const getTypes = async (req, res) => {
+    const {email} = req.query;
+
     try {
-        const types = await donationType.find();
+        const types = await donationType.find({email: email});
         res.status(200).json(types);
     } catch (error) {
         res.status(404).json({message: error.message});

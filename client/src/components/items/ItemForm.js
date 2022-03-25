@@ -7,7 +7,7 @@ import { getTypes, updateTypeCount } from '../../actions/types';
 import {createItem, updateItem} from '../../actions/items';
 
 const ItemForm = () => {
-
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const {state} = useLocation();
     // State to create new item
     const [newItem, setItem] = useState(state ? state.item : {
@@ -26,7 +26,7 @@ const ItemForm = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(getTypes());
+        dispatch(getTypes(user.result.email));
     }, [dispatch]);
 
     

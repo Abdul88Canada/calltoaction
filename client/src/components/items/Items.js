@@ -9,6 +9,7 @@ import { updateTypeCount } from '../../actions/types';
 
 const Items = () => {
   const navigate = useNavigate();
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
 
   const onEditClick = (item) => {
     navigate('/additem', {state:{item: item}});
@@ -16,7 +17,7 @@ const Items = () => {
 
   const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getItems());
+        dispatch(getItems(user.result.email));
     }, [dispatch]);
 
     const handleOnChange = (e) => {
