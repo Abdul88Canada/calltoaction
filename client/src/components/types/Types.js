@@ -25,7 +25,14 @@ const Types = () => {
         dispatch(deleteType(id));
     }
     
-    return ( !types.length ? <div>Loading</div> :
+    return ( !types.length ? 
+        <div className="ui segment">
+            <div className="ui active dimmer">
+                <div className="ui text loader">Loading</div>
+            </div>
+            <p></p>
+        </div> 
+        :
         (
         <div className="ui cards">
             {types.map((type) => {

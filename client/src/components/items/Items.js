@@ -8,7 +8,6 @@ import { updateTypeCount } from '../../actions/types';
 
 
 const Items = () => {
-
   const navigate = useNavigate();
 
   const onEditClick = (item) => {

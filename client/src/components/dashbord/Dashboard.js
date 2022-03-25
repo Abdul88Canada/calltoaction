@@ -1,10 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 
 import Items from "../items/Items";
 
 const Dashboard = () => {
     return (
-        <div><Items /></div>
+        <Items />
     );
 }
 
