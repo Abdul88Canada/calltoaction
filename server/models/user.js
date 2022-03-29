@@ -3,14 +3,15 @@ import mongoose from 'mongoose';
 const userSchema = mongoose.Schema({
     name: String,
     email: String,
-    pass: String,
+    password: String,
     TwitterAccoutn: String,
     FacebookAccount: String,
     InstagramAccoutn: String,
     tags: [],
-    postContent: String
+    postContent: String,
+    id: String
 });
 
-const user = mongoose.model('user', userSchema);
+const user = mongoose.model('User', userSchema);
 
 export default user;

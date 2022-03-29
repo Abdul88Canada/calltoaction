@@ -1,10 +1,10 @@
 import exporess from 'express';
 
-import { getUser, createUser } from '../controllers/users.js';
+import { signin, signup } from '../controllers/users.js';
 
 const router = exporess.Router();
 
-router.get('/', getUser);
-router.post('/', createUser);
+router.post('/signin', signin);
+router.post('/signup', signup);
 
 export default router;
