@@ -11,6 +11,7 @@ const Header = () => {
     const logout = () => {
         dispatch({type: 'LOGOUT'});
         setUser(null);
+        navigate('/auth');
     }
 
     const onSignInClick = () => {

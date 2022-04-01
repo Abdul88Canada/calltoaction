@@ -1,8 +1,17 @@
 import axios from 'axios';
 
-const URL = 'http://localhost:5000/items';
+const API = axios.create({ baseURL: 'http://localhost:5000' });
 
-export const fetchItems = (email) => axios.get(URL, { params: { email: email } });
-export const createItem = (newItem) => axios.post(URL, newItem);
-export const updateItem = (updatedItem, id) => axios.patch(`${URL}/${id}`, updatedItem);
-export const deleteItem = (id) => axios.delete(`${URL}/${id}`);
+API.interceptors.request.use((req) => {
+    if(localStorage.getItem('profile')) {
+        req.headers.Authorization = `Bearer ${JSON.parse(localStorage.getItem('profile')).token}`;
+    }
+    return req;
+});
+
+
+
+export const fetchItems = (email) => API.get('/items', { params: { email: email } });
+export const createItem = (newItem) => API.post('/items', newItem);
+export const updateItem = (updatedItem, id) => API.patch(`'/items'/${id}`, updatedItem);
+export const deleteItem = (id) => API.delete(`'/items'/${id}`);

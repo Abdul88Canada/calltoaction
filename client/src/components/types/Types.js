@@ -17,7 +17,10 @@ const Types = () => {
 
     const dispatch = useDispatch();
         useEffect(() => {
-            dispatch(getTypes(user.result.email));
+            if(!user) { 
+                navigate('/auth');
+            }
+            dispatch(getTypes(user?.result.email));
         }, [dispatch]);
 
     const types = useSelector((state) => state.types);

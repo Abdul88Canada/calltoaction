@@ -1,14 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 import { getTypes, updateTypeCount } from '../../actions/types';
 import {createItem, updateItem} from '../../actions/items';
 
 const ItemForm = () => {
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+    const navigate = useNavigate();
     const {state} = useLocation();
+
+    const types = useSelector((state) => state.types);
+    const dispatch = useDispatch(); 
+
+    useEffect(() => {
+        if(!user) { 
+            navigate('/auth');
+        }
+        dispatch(getTypes(user?.result.email));
+        
+    }, [dispatch]);
+
     // State to create new item
     const [newItem, setItem] = useState(state ? state.item : {
         name: '',
@@ -20,17 +33,8 @@ const ItemForm = () => {
         lowSupplyLimit: 0,
         tracked: true,
         history: [],
-        email: user.result.email
+        email: user?.result.email
     });
-
-    const types = useSelector((state) => state.types);
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(getTypes(user.result.email));
-    }, [dispatch]);
-
-    
 
     const clear = () => {
         setItem({

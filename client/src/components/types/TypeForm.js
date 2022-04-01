@@ -1,7 +1,6 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useDispatch } from "react-redux";
-import {useLocation} from "react-router-dom";
-import Popup from 'react-popup';
+import {useLocation, useNavigate} from "react-router-dom";
 
 import {createType, updateType} from '../../actions/types';
 
@@ -9,14 +8,22 @@ const AddType = () => {
     
     const {state} = useLocation();
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
+    const navigate = useNavigate();
 
     const [type, setType] = useState(state ? state.type : {
         type: '',
         count: 0,
         lowSupplyLimit: 0,
         tracked: false,
-        email: user.result.email
+        email: user?.result.email
     });
+
+    useEffect(() => {
+        if(!user) { 
+            navigate('/auth');
+        }
+    },);
+
 
     const dispatch = useDispatch();
 

@@ -17,7 +17,10 @@ const Items = () => {
 
   const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getItems(user.result.email));
+      if(!user) { 
+        navigate('/auth');
+    }
+        dispatch(getItems(user?.result.email));
     }, [dispatch]);
 
     const handleOnChange = (e) => {
