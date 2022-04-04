@@ -8,20 +8,30 @@ import {useNavigate} from 'react-router-dom';
 import Input from './Input';
 import useStyles from './styles';
 import Icon from './icon';
+import {signin, signup} from '../../actions/auth'
+
+const initialState = {firstName: '', lastName: '', password: '', confirmPassword: '', email: ''}
 
 function Auth() {
     const classes = useStyles();
     const [isSignup, setIsSignup] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const [formData, setFormData] = useState(initialState);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const handleSubmit = () => {
-
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('TEST'+formData.firstName);
+        if(isSignup) {
+            dispatch(signup(formData, navigate));
+        } else {
+            dispatch(signin(formData, navigate));
+        }
     }
 
-    const handleChange = () => {
-
+    const handleChange = (e) => {
+        setFormData({...formData, [e.target.name]: e.target.value})
     }
 
     const handleShowPassword = () => {
@@ -61,14 +71,14 @@ function Auth() {
                     {
                         isSignup && (
                             <>
-                                <Input name='firstName' label='First Name' onChange={handleChange} autoFocus half />
-                                <Input name='firstName' label='First Name' onChange={handleChange} half />
+                                <Input name='firstName' label='First Name' value={formData.firstName} handleChange={(e) => handleChange(e)} autoFocus half />
+                                <Input name='lastName' label='Last Name' handleChange={(e) => handleChange(e)} half />
                             </>
                         )
                     }
-                    <Input name='email' label='Email' onChange={handleChange} type='email'/>
-                    <Input name='password' label='Password' onChange={handleChange} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
-                    {isSignup && <Input name="confirmPassword" label="Repeat Password" onChange={handleChange} type="password"/>}
+                    <Input name='email' label='Email' handleChange={(e) => handleChange(e)} type='email'/>
+                    <Input name='password' label='Password' handleChange={(e) => handleChange(e)} type={showPassword ? 'text' : 'password'} handleShowPassword={handleShowPassword} />
+                    {isSignup && <Input name="confirmPassword" label="Repeat Password" handleChange={(e) => handleChange(e)} type="password"/>}
                 </Grid>
                 <Button type="submit" fullWidth variant="contained" color='primary' className={classes.submit}>{isSignup ? 'SignUp' : 'SignIn'}</Button>
                 <GoogleLogin

@@ -21,6 +21,7 @@ const Header = () => {
     useEffect(() => {
         const token = user?.token;
         setUser(JSON.parse(localStorage.getItem('profile')));
+        console.log(user);
     }, [location]);
     
     return (

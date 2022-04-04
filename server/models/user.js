@@ -4,11 +4,6 @@ const userSchema = mongoose.Schema({
     name: String,
     email: String,
     password: String,
-    TwitterAccoutn: String,
-    FacebookAccount: String,
-    InstagramAccoutn: String,
-    tags: [],
-    postContent: String,
     id: String
 });
 
